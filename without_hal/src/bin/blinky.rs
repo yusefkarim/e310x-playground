@@ -2,15 +2,20 @@
 #![no_main]
 
 use common::*;
-use core::arch::asm;
+use core::{arch::asm, fmt::Write};
 use e310x as device;
 
 #[riscv_rt::entry]
 fn main() -> ! {
+    // rtt_target::rtt_init_default!();
+    // rtt_target::rprintln!("Hello, RISC-V!");
+    // defmt::info!("Hello, RISC-V!");
+    let mut output = jlink_rtt::Output::new();
+    output.write_str("Hello, RISC-V!").unwrap();
+
     // Take ownership of the device peripherals singleton
     if let Some(dp) = device::Peripherals::take() {
         let gpio = dp.GPIO0;
-        defmt::info!("Wow, this shouldn't be here");
         // Blue LED
         gpio.input_en.modify(|_, w| w.pin5().clear_bit());
         gpio.drive.modify(|_, w| w.pin5().clear_bit());
@@ -29,7 +34,6 @@ fn main() -> ! {
                     asm!("nop");
                 }
             }
-            defmt::info!("Wow");
         }
     };
     panic!();
