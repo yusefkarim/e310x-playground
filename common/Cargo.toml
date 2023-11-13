@@ -1,0 +1,25 @@
+[package]
+name = "common"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+# Provides startup code and useful attributes
+# https://docs.rs/riscv-rt
+riscv-rt = "0.11"
+
+# Provides low-level access to registers and assembly instructions
+# https://docs.rs/riscv
+riscv = { version = "0.10", features = ["critical-section-single-hart"] }
+
+# Set the panicking behavior to halt the CPU
+# https://docs.rs/crate/panic-halt
+panic-halt = "0.2.0"
+
+# Efficient logging framework
+# https://docs.rs/defmt
+defmt = "0.3"
+
+# Transmit defmt log messages over the RTT (Real-Time Transfer) protocol
+# https://docs.rs/defmt-rtt
+defmt-rtt = "0.4"

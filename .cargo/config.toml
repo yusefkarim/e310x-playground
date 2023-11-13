@@ -1,0 +1,20 @@
+[target.riscv32imac-unknown-none-elf]
+runner = "probe-rs run --chip fe310-g002"
+# runner = "riscv32-elf-gdb -q -x gdb_init"
+rustflags = [
+    "-C", "link-arg=-Tmemory.x",
+    "-C", "link-arg=-Tlink.x",
+    "-C", "link-arg=--nmagic",
+    "-C", "link-arg=-Tdefmt.x"
+]
+
+[build]
+target = "riscv32imac-unknown-none-elf"
+target-dir = ".target"
+
+[alias]
+b = "build"
+bb = "build --bin"
+rb = "run --bin"
+rrb = "run --release --bin"
+f = "flash --chip fe310-g002 --bin"

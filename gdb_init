@@ -1,0 +1,10 @@
+# Run the following first: openocd -f board/sifive-hifive1-revb.cfg
+set history save on
+set confirm off
+set remotetimeout 10000
+target extended-remote :3333
+set print asm-demangle on
+monitor reset halt
+# load
+# continue
+# quit

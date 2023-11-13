@@ -1,0 +1,13 @@
+[package]
+name = "with_hal"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+common = { path = "../common" }
+
+# Community built hardware abstraction layer (HAL)
+# https://docs.rs/e310x-hal/latest/e310x_hal
+# e310x-hal = { version = "0.11", features = ["g002"] }
+e310x-hal = { git = "https://github.com/jannic/e310x-hal.git", branch = "fix-StatefulOutputPin", features  = ["g002"] }
+
