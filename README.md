@@ -12,8 +12,6 @@ Eventually, there will be more interesting things using a hardware abstraction l
 
 ## On-board buttons
 
-TODO: the below was copy-pasted from Sparkfun's website - you should reword this (maybe make it bullet form)
-
 The RED-V Thing Plus has two buttons. These are the:
 
 * RESET button
