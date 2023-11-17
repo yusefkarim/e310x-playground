@@ -7,21 +7,7 @@ use e310x as device;
 
 #[riscv_rt::entry]
 fn main() -> ! {
-    let channels = rtt_target::rtt_init! {
-        up: {
-            0: {
-                size: 512
-                mode: BlockIfFull
-                name: "Terminal"
-            }
-            1: {
-                size: 1024
-                mode: NoBlockSkip
-                name: "Log"
-            }
-        }
-    };
-    rtt_target::set_print_channel(channels.up.0);
+    rtt_target::rtt_init_print!(NoBlockSkip);
     rtt_target::rprintln!("Hello, RISC-V!");
 
     // Take ownership of the device peripherals singleton
@@ -35,6 +21,7 @@ fn main() -> ! {
         gpio.iof_en.modify(|_, w| w.pin5().clear_bit());
 
         loop {
+            rtt_target::rprintln!("Toggling user LED");
             if gpio.output_val.read().pin5().bit_is_clear() {
                 gpio.output_val.modify(|_, w| w.pin5().set_bit()); // ON
             } else {
