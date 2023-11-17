@@ -8,5 +8,5 @@ common = { path = "../common" }
 
 # Community built peripheral access crate (PAC)
 # https://docs.rs/e310x/latest
-e310x = { version = "0.11", features = ["critical-section", "g002"] }
-
+# e310x = { version = "0.11", features = ["critical-section", "g002"] }
+e310x = { path = "../crates/e310x", features = ["critical-section", "rt", "g002"] }

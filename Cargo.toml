@@ -6,6 +6,7 @@ edition = "2021"
 resolver = "2"
 members = ["common", "with_hal", "without_hal"]
 default-members = ["with_hal", "without_hal"]
+exclude = ["crates"]
 
 # cargo build/run
 [profile.dev]

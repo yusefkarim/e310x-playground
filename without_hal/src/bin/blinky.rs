@@ -2,16 +2,27 @@
 #![no_main]
 
 use common::*;
-use core::{arch::asm, fmt::Write};
+use core::arch::asm;
 use e310x as device;
 
 #[riscv_rt::entry]
 fn main() -> ! {
-    // rtt_target::rtt_init_default!();
-    // rtt_target::rprintln!("Hello, RISC-V!");
-    // defmt::info!("Hello, RISC-V!");
-    let mut output = jlink_rtt::Output::new();
-    output.write_str("Hello, RISC-V!").unwrap();
+    let channels = rtt_target::rtt_init! {
+        up: {
+            0: {
+                size: 512
+                mode: BlockIfFull
+                name: "Terminal"
+            }
+            1: {
+                size: 1024
+                mode: NoBlockSkip
+                name: "Log"
+            }
+        }
+    };
+    rtt_target::set_print_channel(channels.up.0);
+    rtt_target::rprintln!("Hello, RISC-V!");
 
     // Take ownership of the device peripherals singleton
     if let Some(dp) = device::Peripherals::take() {
@@ -36,5 +47,6 @@ fn main() -> ! {
             }
         }
     };
+    rtt_target::rprintln!("Goodbye, RISC-V!");
     panic!();
 }

@@ -12,11 +12,9 @@ riscv-rt = "0.11"
 # https://docs.rs/riscv
 riscv = { version = "0.10", features = ["critical-section-single-hart"] }
 
-# Set the panicking behavior to halt the CPU
-# https://docs.rs/crate/panic-halt
-panic-halt = "0.2.0"
-
-# rtt-target = "0.4"
+# Efficient logging framework
+# https://docs.rs/rtt-target
+rtt-target = "0.4"
 
 # Efficient logging framework
 # https://docs.rs/defmt
@@ -26,4 +24,4 @@ panic-halt = "0.2.0"
 # https://docs.rs/defmt-rtt
 # defmt-rtt = "0.4"
 
-jlink_rtt = "0.2"
+# jlink_rtt = "0.2"
