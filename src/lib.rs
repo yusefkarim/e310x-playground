@@ -13,8 +13,8 @@ fn panic(info: &PanicInfo) -> ! {
 }
 
 // Exports
-pub use riscv;
-pub use riscv_rt;
-pub use rtt_target;
+// pub use riscv;
+// pub use riscv_rt;
+// pub use rtt_target;
 // pub use defmt;
 // pub use jlink_rtt;

@@ -1,12 +1,29 @@
-[workspace.package]
+[package]
+name = "e310x_playground"
 version = "0.1.0"
 edition = "2021"
 
-[workspace]
-resolver = "2"
-members = ["common", "with_hal", "without_hal"]
-default-members = ["with_hal", "without_hal"]
-exclude = ["crates"]
+[dependencies]
+# Provides startup code and useful attributes
+# https://docs.rs/riscv-rt
+riscv-rt = "0.11"
+
+# Provides low-level access to registers and assembly instructions
+# https://docs.rs/riscv
+riscv = { version = "0.10", features = ["critical-section-single-hart"] }
+
+# Efficient logging framework
+# https://docs.rs/rtt-target
+rtt-target = "0.4"
+
+# Community built peripheral access crate (PAC)
+# https://docs.rs/e310x/latest
+e310x = { version = "0.11", features = ["critical-section", "g002"] }
+# e310x = { path = "./crates/e310x", features = ["critical-section", "rt", "g002"] }
+
+# Community built hardware abstraction layer (HAL)
+# https://docs.rs/e310x-hal/latest/e310x_hal
+e310x-hal = { path = "./crates/e310x-hal", features = ["g002"] }
 
 # cargo build/run
 [profile.dev]

@@ -1,16 +1,20 @@
 #![no_std]
 #![no_main]
 
-use common::*;
-use e310x_hal::{clock::Clocks, delay::Sleep, e310x as pac, prelude::*, time::Hertz, DeviceResources};
+use e310x_hal::{clock::Clocks, delay::Sleep, prelude::*, time::Hertz, DeviceResources};
+use e310x_playground as _;
+use rtt_target;
 
 #[riscv_rt::entry]
 fn main() -> ! {
+    rtt_target::rtt_init_print!(NoBlockSkip);
+    rtt_target::rprintln!("System starting up...");
     // Take ownership of the device resource & peripheral singletons
-    if let (Some(dr), Some(dp)) = (DeviceResources::take(), pac::Peripherals::take()) {
+    if let Some(dr) = DeviceResources::take() {
+        rtt_target::rprintln!("Configuring peripherals...");
         let clint = dr.core_peripherals.clint;
-        let aon = dp.AONCLK;
-        let prci = dp.PRCI;
+        let aon = dr.peripherals.AONCLK;
+        let prci = dr.peripherals.PRCI;
 
         let coreclk = prci.constrain();
         let coreclk = coreclk
@@ -21,17 +25,14 @@ fn main() -> ! {
         let clocks = Clocks::freeze(coreclk, aonclk);
 
         let mut sleep = Sleep::new(clint.mtimecmp, clocks);
+        let mut led = dr.pins.pin5.into_output();
 
-        let gpio = dp.GPIO0.split();
-        let mut led = gpio.pin5.into_output();
-
+        rtt_target::rprintln!("Entering main loop...");
         loop {
-            led.set_high().unwrap();
+            led.toggle().unwrap();
             sleep.delay_ms(500);
-            led.set_low().unwrap();
-            sleep.delay_ms(500);
+            rtt_target::rprint!(".");
         }
-
     };
     panic!();
 }
