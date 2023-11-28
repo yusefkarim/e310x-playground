@@ -1,9 +1,6 @@
 # Learning embedded systems with the SparkFun RED-V Thing Plus (SiFive Freedom E310-G002) and Rust!
 
-This repository is primarily for learning and trying random things.
-You may find basic code for learning embedded at the register level in [without_hal](without_hal).
-Eventually, there will be more interesting things using a hardware abstraction library (HAL) in [with_hal](with_hal).
-
+This repository is primarily for learning and trying random things with the E310-G002 MCU via the SparkFun RED-V Thing Plus board.
 
 ## Development Board
 * [Freedom E310-G002 Manual](https://sifive.cdn.prismic.io/sifive/034760b5-ac6a-4b1c-911c-f4148bb2c4a5_fe310-g002-v1p5.pdf)
