@@ -1,3 +1,9 @@
+# 📁 Archived
+
+Checkout the [firmware-playground](https://github.com/yusefkarim/firmware-playground) for more up-to-date fun 🛝.
+
+---
+
 # Learning embedded systems with the SparkFun RED-V Thing Plus (SiFive Freedom E310-G002) and Rust!
 
 This repository is primarily for learning and trying random things with the E310-G002 MCU via the SparkFun RED-V Thing Plus board.
